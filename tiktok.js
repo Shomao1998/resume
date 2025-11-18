@@ -120,7 +120,7 @@ const translations = {
     'nav.contact': '連絡先',
     'hero.greeting': 'こんにちは、',
     'hero.name': "I'm Xinrou",
-    'hero.lead': '界を胸に抱き、人生の無限の可能性を旅しつつ、皆んなに幸せを届けたい。',
+    'hero.lead': '世界を胸に抱き、人生の無限の可能性を旅しつつ、皆んなに幸せを届けたい。',
     'hero.resume': '履歴書',
     'labs.title': 'プロジェクトハイライト',
     'labs.card1.tag': 'LIVE-AI',
