@@ -18,9 +18,9 @@
   <header class="tk-hero">
     <nav class="tk-nav">
       <div class="nav-links">
-        <a href="#labs">Projects</a>
-        <a href="#timeline">Journey</a>
-        <a href="#connect">Contact</a>
+        <a href="#labs" data-i18n="nav.projects">Projects</a>
+        <a href="#timeline" data-i18n="nav.journey">Journey</a>
+        <a href="#connect" data-i18n="nav.contact">Contact</a>
       </div>
       <div class="language-switcher" data-open="false">
         <button class="language-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
@@ -29,13 +29,19 @@
         </button>
         <ul class="language-menu" role="listbox">
           <li>
-            <button class="language-option" type="button" data-value="en" aria-selected="true">English</button>
+            <button class="language-option" type="button" data-value="en" aria-selected="true" data-i18n="lang.option.en">
+              English
+            </button>
           </li>
           <li>
-            <button class="language-option" type="button" data-value="ja" aria-selected="false">日本語</button>
+            <button class="language-option" type="button" data-value="ja" aria-selected="false" data-i18n="lang.option.ja">
+              日本語
+            </button>
           </li>
           <li>
-            <button class="language-option" type="button" data-value="zh" aria-selected="false">中文</button>
+            <button class="language-option" type="button" data-value="zh" aria-selected="false" data-i18n="lang.option.zh">
+              中文
+            </button>
           </li>
         </ul>
       </div>
@@ -51,15 +57,17 @@
         <div class="hero-title-block">
           <h1 class="typing-title">
             <span class="typing-line">
-              <span class="typing-text" data-text="Hi,">Hi,</span>
+              <span class="typing-text" data-text="Hi," data-i18n="hero.greeting">Hi,</span>
               <span class="typing-caret" aria-hidden="true"></span>
             </span>
             <span class="typing-line">
-              <span class="typing-text" data-text="I'm Xinrou">I'm Xinrou</span>
+              <span class="typing-text" data-text="I'm Xinrou" data-i18n="hero.name">I'm Xinrou</span>
               <span class="typing-caret" aria-hidden="true"></span>
             </span>
           </h1>
-          <p class="lead">Embrace the world, explore every possibility in life, and bring happiness to the people around you.</p>
+          <p class="lead" data-i18n="hero.lead">
+            Embrace the world, explore every possibility in life, and bring happiness to the people around you.
+          </p>
           <div class="cta-group">
             <a
               class="btn icon linkedin"
@@ -87,7 +95,7 @@
                 />
               </svg>
             </a>
-            <a class="btn primary" href="xinrou_resume.pdf" download>
+            <a class="btn primary" href="xinrou_resume.pdf" download data-i18n="hero.resume">
               Resume
             </a>
           </div>
@@ -99,61 +107,61 @@
   <main>
     <section id="labs" class="panel">
       <div class="panel__header">
-        <h2>Project Highlights</h2>
+        <h2 data-i18n="labs.title">Project Highlights</h2>
       </div>
       <div class="cards">
         <article class="glow-card">
-          <div class="tag">LIVE-AI</div>
-          <h3>Neon Pulse Studio</h3>
-          <p>An interactive live room where GPT agents remix prompts, beats, and lights in real time.</p>
-          <span>2024 · Beta</span>
+          <div class="tag" data-i18n="labs.card1.tag">LIVE-AI</div>
+          <h3 data-i18n="labs.card1.title">Neon Pulse Studio</h3>
+          <p data-i18n="labs.card1.desc">An interactive live room where GPT agents remix prompts, beats, and lights in real time.</p>
+          <span data-i18n="labs.card1.meta">2024 · Beta</span>
         </article>
         <article class="glow-card">
-          <div class="tag">AR</div>
-          <h3>Holo Loop</h3>
-          <p>A wearable particle loop crafted with WebAR and Effect House that shifts colors with every beat.</p>
-          <span>2023 · Launch</span>
+          <div class="tag" data-i18n="labs.card2.tag">AR</div>
+          <h3 data-i18n="labs.card2.title">Holo Loop</h3>
+          <p data-i18n="labs.card2.desc">A wearable particle loop crafted with WebAR and Effect House that shifts colors with every beat.</p>
+          <span data-i18n="labs.card2.meta">2023 · Launch</span>
         </article>
         <article class="glow-card">
-          <div class="tag">DATA</div>
-          <h3>Creator Radar</h3>
-          <p>A signal board combining TikTok API stats, commerce conversion, and content insights for brands.</p>
-          <span>2022 · SaaS</span>
+          <div class="tag" data-i18n="labs.card3.tag">DATA</div>
+          <h3 data-i18n="labs.card3.title">Creator Radar</h3>
+          <p data-i18n="labs.card3.desc">A signal board combining TikTok API stats, commerce conversion, and content insights for brands.</p>
+          <span data-i18n="labs.card3.meta">2022 · SaaS</span>
         </article>
       </div>
     </section>
 
     <section id="timeline" class="panel timeline">
       <div class="panel__header">
-        <h2>Experience Journey</h2>
+        <h2 data-i18n="timeline.title">Experience Journey</h2>
       </div>
       <ol>
         <li>
           <div class="dot"></div>
           <div>
-            <h3>2023 - Now · Creative Tech Lead</h3>
-            <p>Designing commerce-ready livestream systems with AI scene direction and automated overlays.</p>
+            <h3 data-i18n="timeline.item1.title">2023 - Now · Creative Tech Lead</h3>
+            <p data-i18n="timeline.item1.desc">Designing commerce-ready livestream systems with AI scene direction and automated overlays.</p>
           </div>
         </li>
         <li>
           <div class="dot"></div>
           <div>
-            <h3>2021 - 2023 · Product Storyteller</h3>
-            <p>Directed TikTok-first campaign narratives for lifestyle brands entering short-video ecosystems.</p>
+            <h3 data-i18n="timeline.item2.title">2021 - 2023 · Product Storyteller</h3>
+            <p data-i18n="timeline.item2.desc">Directed TikTok-first campaign narratives for lifestyle brands entering short-video ecosystems.</p>
           </div>
         </li>
         <li>
           <div class="dot"></div>
           <div>
-            <h3>2019 - 2021 · Immersive Developer</h3>
-            <p>Built AR filters, motion capture puppets, and interactive microsites with cross-device syncing.</p>
+            <h3 data-i18n="timeline.item3.title">2019 - 2021 · Immersive Developer</h3>
+            <p data-i18n="timeline.item3.desc">Built AR filters, motion capture puppets, and interactive microsites with cross-device syncing.</p>
           </div>
         </li>
         <li>
           <div class="dot"></div>
           <div>
-            <h3>2017 - 2019 · Visual Designer</h3>
-            <p>Crafted kinetic typography packages and festival visuals for entertainment & tech partners.</p>
+            <h3 data-i18n="timeline.item4.title">2017 - 2019 · Visual Designer</h3>
+            <p data-i18n="timeline.item4.desc">Crafted kinetic typography packages and festival visuals for entertainment & tech partners.</p>
           </div>
         </li>
       </ol>
@@ -161,31 +169,31 @@
 
     <section class="panel skills">
       <div class="panel__header">
-        <h2>Languages & Capabilities</h2>
+        <h2 data-i18n="skills.title">Languages & Capabilities</h2>
       </div>
       <div class="skills-grid">
         <article class="skill-card">
-          <h3>Language Skill</h3>
+          <h3 data-i18n="skills.language.title">Language Skill</h3>
           <ul>
-            <li>English: full professional proficiency</li>
-            <li>Mandarin: Native</li>
-            <li>Japanese: full professional proficiency</li>
+            <li data-i18n="skills.language.english">English: full professional proficiency</li>
+            <li data-i18n="skills.language.mandarin">Mandarin: Native</li>
+            <li data-i18n="skills.language.japanese">Japanese: full professional proficiency</li>
           </ul>
         </article>
         <article class="skill-card">
-          <h3>Programming Skill</h3>
+          <h3 data-i18n="skills.programming.title">Programming Skill</h3>
           <ul>
-            <li>TypeScript / React / Next.js frontends</li>
-            <li>Three.js, WebGL, and shader animation</li>
-            <li>Node.js automation & AI toolchains</li>
+            <li data-i18n="skills.programming.item1">TypeScript / React / Next.js frontends</li>
+            <li data-i18n="skills.programming.item2">Three.js, WebGL, and shader animation</li>
+            <li data-i18n="skills.programming.item3">Node.js automation & AI toolchains</li>
           </ul>
         </article>
         <article class="skill-card">
-          <h3>Professional Skill</h3>
+          <h3 data-i18n="skills.professional.title">Professional Skill</h3>
           <ul>
-            <li>Creative direction & interactive storytelling</li>
-            <li>Campaign measurement & content ops</li>
-            <li>Client workshop facilitation</li>
+            <li data-i18n="skills.professional.item1">Creative direction & interactive storytelling</li>
+            <li data-i18n="skills.professional.item2">Campaign measurement & content ops</li>
+            <li data-i18n="skills.professional.item3">Client workshop facilitation</li>
           </ul>
         </article>
       </div>
@@ -193,20 +201,22 @@
 
     <section class="panel split">
       <div class="split-card">
-        <h2>What I Offer</h2>
+        <h2 data-i18n="split.offer.title">What I Offer</h2>
         <ul>
-          <li>A passionate partner</li>
-          <li>A friend who's endlessly curious about the world</li>
-          <li>A globally minded multilingual communicator</li>
-          <li>A partner committed to lifelong learning</li>
+          <li data-i18n="split.offer.item1">A passionate partner</li>
+          <li data-i18n="split.offer.item2">A friend who's endlessly curious about the world</li>
+          <li data-i18n="split.offer.item3">A globally minded multilingual communicator</li>
+          <li data-i18n="split.offer.item4">A partner committed to lifelong learning</li>
         </ul>
       </div>
       <div class="split-card" id="connect">
-        <h2>Contact Me</h2>
-        <p>Please feel free to contact me anytime—I'm very happy to meet and chat with you.</p>
+        <h2 data-i18n="split.contact.title">Contact Me</h2>
+        <p data-i18n="split.contact.body">
+          Please feel free to contact me anytime—I'm very happy to meet and chat with you.
+        </p>
         <div class="contact-grid">
           <div>
-            <span>Mail</span>
+            <span data-i18n="split.contact.mail">Mail</span>
             <a href="mailto:xinrou.dong@outlook.com">xinrou.dong@outlook.com</a>
           </div>
         </div>
@@ -215,7 +225,7 @@
   </main>
 
   <footer class="tk-footer">
-    <p>© 2024 Xinrou · TikTok Tech Edition</p>
+    <p data-i18n="footer.copy">© 2024 Xinrou · TikTok Tech Edition</p>
   </footer>
 
   <script src="tiktok.js"></script>
