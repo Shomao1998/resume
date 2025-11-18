@@ -119,7 +119,8 @@ const translations = {
     'nav.journey': 'ジャーニー',
     'nav.contact': '連絡先',
     'hero.greeting': 'こんにちは、',
-    'hero.name': '私はXinrouです',
+    'hero.name': "I'm Xinrou",
+    'hero.title.full': 'こんにちは、I’m Xinrou',
     'hero.lead': '世界を抱きしめ、人生のあらゆる可能性を探り、周りの人に幸せを届けます。',
     'hero.resume': '履歴書',
     'labs.title': 'プロジェクトハイライト',
@@ -177,7 +178,15 @@ const navLinks = [
   { href: '#connect', key: 'nav.contact' },
 ];
 
-const heroLineKeys = ['hero.greeting', 'hero.name'];
+const heroLineKeysByLanguage = {
+  default: ['hero.greeting', 'hero.name'],
+  ja: ['hero.title.full'],
+};
+
+const getHeroLineKeys = (language) => heroLineKeysByLanguage[language] || heroLineKeysByLanguage.default;
+
+const createHeroLineState = (language) =>
+  getHeroLineKeys(language).map((key) => ({ key, typed: '', complete: false }));
 
 const labsCards = [
   {
@@ -245,7 +254,7 @@ createApp({
       languages: ['en', 'ja', 'zh'],
       currentLanguage: document.documentElement.lang || DEFAULT_LANGUAGE,
       languageMenuOpen: false,
-      heroLines: heroLineKeys.map((key) => ({ key, typed: '', complete: false })),
+      heroLines: createHeroLineState(document.documentElement.lang || DEFAULT_LANGUAGE),
       pulseFrame: null,
       typingRunId: 0,
     };
@@ -290,6 +299,10 @@ createApp({
     },
     async runTypingSequence() {
       const runId = ++this.typingRunId;
+      const keys = getHeroLineKeys(this.currentLanguage);
+      if (keys.length !== this.heroLines.length || keys.some((key, index) => this.heroLines[index]?.key !== key)) {
+        this.heroLines = createHeroLineState(this.currentLanguage);
+      }
       this.heroLines.forEach((line) => {
         line.typed = '';
         line.complete = false;
