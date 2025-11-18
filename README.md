@@ -2,7 +2,7 @@
 
 This repository now focuses solely on Xinrou's TikTok-inspired interactive resume. The layout features a neon hero section, featured projects, an experience timeline, skill highlights, offered services, and contact channels.
 
-欢迎来到xinrou的主页，前产品经理和咨询顾问，我在这里介绍我的旅程，欢迎联系我。
+Welcome to Xinrou's homepage—I'm a former product manager and consultant sharing my journey here, so feel free to connect.
 
 ## Preview locally
 
@@ -17,7 +17,6 @@ npx serve .
 
 ## Customize
 - Update text content directly in `index.html`—copy is grouped by section for easier edits.
-- Replace the hero portrait placeholder inside `.hero-media` with an `<img>` tag pointing to your image.
 - Adjust palette or animation speeds via CSS variables declared at the top of `tiktok.css`.
 
 ## Version control workflow
