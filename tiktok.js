@@ -64,6 +64,7 @@ const translations = {
     'nav.contact': '联系',
     'hero.greeting': '你好，',
     'hero.name': '我是辛柔',
+    'hero.title.zh': 'Hi，我是xinrou',
     'hero.lead': '拥抱世界，探索生活的每一种可能，把快乐带给身边的人。',
     'hero.resume': '简历',
     'labs.title': '项目亮点',
@@ -120,6 +121,7 @@ const translations = {
     'nav.contact': '連絡先',
     'hero.greeting': 'こんにちは、',
     'hero.name': '私はXinrouです',
+    'hero.title.ja': "こんにちは、I'm Xinrou",
     'hero.lead': '世界を抱きしめ、人生のあらゆる可能性を探り、周りの人に幸せを届けます。',
     'hero.resume': '履歴書',
     'labs.title': 'プロジェクトハイライト',
@@ -170,169 +172,205 @@ const translations = {
 };
 
 const DEFAULT_LANGUAGE = 'en';
-let currentLanguage = document.documentElement.lang || DEFAULT_LANGUAGE;
 
-function applyTranslations(language, options = {}) {
-  const { freezeTyping = true } = options;
-  const fallback = translations[DEFAULT_LANGUAGE] || {};
-  document.querySelectorAll('[data-i18n]').forEach((element) => {
-    const key = element.dataset.i18n;
-    if (!key) return;
-    const localized = translations[language]?.[key] ?? fallback[key];
-    if (!localized) return;
-    if (element.classList.contains('typing-text')) {
-      const caret = element.parentElement?.querySelector('.typing-caret');
-      element.dataset.text = localized;
-      element.textContent = localized;
-      if (freezeTyping) {
-        element.classList.add('typing-complete');
-        caret?.classList.add('paused');
-      } else {
-        element.classList.remove('typing-complete');
-        caret?.classList.remove('paused');
+const navLinks = [
+  { href: '#labs', key: 'nav.projects' },
+  { href: '#timeline', key: 'nav.journey' },
+  { href: '#connect', key: 'nav.contact' },
+];
+
+const heroLineKeyMap = {
+  default: ['hero.greeting', 'hero.name'],
+  zh: ['hero.title.zh'],
+  ja: ['hero.title.ja'],
+};
+
+const getHeroLineKeys = (language) => heroLineKeyMap[language] || heroLineKeyMap.default;
+
+const labsCards = [
+  {
+    key: 'card1',
+    tagKey: 'labs.card1.tag',
+    titleKey: 'labs.card1.title',
+    descKey: 'labs.card1.desc',
+    metaKey: 'labs.card1.meta',
+  },
+  {
+    key: 'card2',
+    tagKey: 'labs.card2.tag',
+    titleKey: 'labs.card2.title',
+    descKey: 'labs.card2.desc',
+    metaKey: 'labs.card2.meta',
+  },
+  {
+    key: 'card3',
+    tagKey: 'labs.card3.tag',
+    titleKey: 'labs.card3.title',
+    descKey: 'labs.card3.desc',
+    metaKey: 'labs.card3.meta',
+  },
+];
+
+const timelineEntries = [
+  { titleKey: 'timeline.item1.title', descKey: 'timeline.item1.desc' },
+  { titleKey: 'timeline.item2.title', descKey: 'timeline.item2.desc' },
+  { titleKey: 'timeline.item3.title', descKey: 'timeline.item3.desc' },
+  { titleKey: 'timeline.item4.title', descKey: 'timeline.item4.desc' },
+];
+
+const skills = [
+  {
+    titleKey: 'skills.language.title',
+    items: ['skills.language.english', 'skills.language.mandarin', 'skills.language.japanese'],
+  },
+  {
+    titleKey: 'skills.programming.title',
+    items: ['skills.programming.item1', 'skills.programming.item2', 'skills.programming.item3'],
+  },
+  {
+    titleKey: 'skills.professional.title',
+    items: ['skills.professional.item1', 'skills.professional.item2', 'skills.professional.item3'],
+  },
+];
+
+const offerings = [
+  'split.offer.item1',
+  'split.offer.item2',
+  'split.offer.item3',
+  'split.offer.item4',
+];
+
+const { createApp } = Vue;
+
+createApp({
+  data() {
+    const initialLanguage = document.documentElement.lang || DEFAULT_LANGUAGE;
+    return {
+      navLinks,
+      labsCards,
+      timelineEntries,
+      skills,
+      offerings,
+      languages: ['en', 'ja', 'zh'],
+      currentLanguage: initialLanguage,
+      languageMenuOpen: false,
+      heroLines: getHeroLineKeys(initialLanguage).map((key) => ({ key, typed: '', complete: false })),
+      pulseFrame: null,
+      typingRunId: 0,
+    };
+  },
+  computed: {
+    languageLabel() {
+      return this.t('lang.option.' + this.currentLanguage);
+    },
+  },
+  methods: {
+    t(key) {
+      const fallback = translations[DEFAULT_LANGUAGE] || {};
+      return translations[this.currentLanguage]?.[key] ?? fallback[key] ?? key;
+    },
+    heroLineKeysFor(language = this.currentLanguage) {
+      return getHeroLineKeys(language);
+    },
+    toggleLanguageMenu() {
+      this.languageMenuOpen = !this.languageMenuOpen;
+    },
+    setLanguage(language) {
+      const normalized = translations[language] ? language : DEFAULT_LANGUAGE;
+      if (normalized !== this.currentLanguage) {
+        this.currentLanguage = normalized;
       }
-    } else {
-      element.textContent = localized;
-    }
-  });
-}
-
-function setLanguage(language, options = {}) {
-  const { force = false, freezeTyping = true } = options;
-  const normalized = translations[language] ? language : DEFAULT_LANGUAGE;
-  if (!force && normalized === currentLanguage) {
-    return false;
-  }
-  currentLanguage = normalized;
-  applyTranslations(normalized, { freezeTyping });
-  document.documentElement.setAttribute('lang', normalized);
-  return true;
-}
-
-if (currentLanguage !== DEFAULT_LANGUAGE) {
-  setLanguage(currentLanguage, { force: true, freezeTyping: false });
-} else {
-  document.documentElement.setAttribute('lang', currentLanguage);
-}
-
-const glowCards = document.querySelectorAll('.glow-card');
-
-function handlePointer(e) {
-  const target = e.currentTarget;
-  const rect = target.getBoundingClientRect();
-  const x = ((e.clientX - rect.left) / rect.width) * 100;
-  const y = ((e.clientY - rect.top) / rect.height) * 100;
-  target.style.setProperty('--mouse-x', `${x}%`);
-  target.style.setProperty('--mouse-y', `${y}%`);
-}
-
-glowCards.forEach((card) => {
-  card.addEventListener('pointermove', handlePointer);
-});
-
-let pulseFrame = null;
-function animatePulse(timestamp) {
-  const intensity = Math.sin(timestamp / 250) * 0.08 + 0.18;
-  document.documentElement.style.setProperty('--border', `rgba(12, 16, 35, ${0.08 + intensity})`);
-  pulseFrame = requestAnimationFrame(animatePulse);
-}
-
-pulseFrame = requestAnimationFrame(animatePulse);
-
-window.addEventListener('beforeunload', () => {
-  if (pulseFrame) cancelAnimationFrame(pulseFrame);
-});
-
-const languageSwitcher = document.querySelector('.language-switcher');
-
-if (languageSwitcher) {
-  const toggle = languageSwitcher.querySelector('.language-toggle');
-  const label = languageSwitcher.querySelector('.language-label');
-  const options = languageSwitcher.querySelectorAll('.language-option');
-
-  const syncLanguageSelection = () => {
-    options.forEach((option) => {
-      const isSelected = option.dataset.value === currentLanguage;
-      option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
-      if (isSelected && label) {
-        label.textContent = option.textContent.trim();
+      this.languageMenuOpen = false;
+    },
+    onDocumentClick(event) {
+      const switcher = this.$refs.languageSwitcher;
+      if (switcher && !switcher.contains(event.target)) {
+        this.languageMenuOpen = false;
       }
-    });
-  };
-
-  const setOpen = (open) => {
-    languageSwitcher.dataset.open = open ? 'true' : 'false';
-    if (toggle) {
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
-  };
-
-  toggle?.addEventListener('click', (event) => {
-    event.stopPropagation();
-    const isOpen = languageSwitcher.dataset.open === 'true';
-    setOpen(!isOpen);
-  });
-
-  options.forEach((option) => {
-    option.addEventListener('click', () => {
-      const langValue = option.dataset.value || DEFAULT_LANGUAGE;
-      setLanguage(langValue);
-      syncLanguageSelection();
-      setOpen(false);
-    });
-  });
-
-  document.addEventListener('click', (event) => {
-    if (!languageSwitcher.contains(event.target)) {
-      setOpen(false);
-    }
-  });
-
-  syncLanguageSelection();
-}
-
-const typingLines = document.querySelectorAll('.typing-line');
-
-if (typingLines.length) {
-  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-  const typeLine = (line) =>
-    new Promise((resolve) => {
-      const textEl = line.querySelector('.typing-text');
-      const caretEl = line.querySelector('.typing-caret');
-      const fullText = textEl?.dataset.text?.trim() || textEl?.textContent?.trim() || '';
-      let index = 0;
-
-      if (textEl) {
-        textEl.classList.remove('typing-complete');
-        textEl.textContent = '';
-      }
-      caretEl?.classList.remove('paused');
-
-      const typeNext = () => {
-        if (!textEl) {
-          resolve();
+    },
+    handlePointer(event) {
+      const target = event.currentTarget;
+      if (!(target instanceof HTMLElement)) return;
+      const rect = target.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      target.style.setProperty('--mouse-x', `${x}%`);
+      target.style.setProperty('--mouse-y', `${y}%`);
+    },
+    sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    },
+    async runTypingSequence() {
+      const runId = ++this.typingRunId;
+      this.heroLines.forEach((line) => {
+        line.typed = '';
+        line.complete = false;
+      });
+      await this.sleep(400);
+      for (const line of this.heroLines) {
+        const text = this.t(line.key);
+        await this.typeText(line, text, runId);
+        if (runId !== this.typingRunId) {
           return;
         }
-
-        if (index <= fullText.length) {
-          textEl.textContent = fullText.slice(0, index);
-          index += 1;
-          setTimeout(typeNext, 120);
-        } else {
-          textEl.classList.add('typing-complete');
-          caretEl?.classList.add('paused');
-          resolve();
-        }
+      }
+    },
+    typeText(line, text, runId) {
+      return new Promise((resolve) => {
+        const safeText = text ?? '';
+        let index = 0;
+        const typeNext = () => {
+          if (runId !== this.typingRunId) {
+            resolve();
+            return;
+          }
+          if (index <= safeText.length) {
+            line.typed = safeText.slice(0, index);
+            index += 1;
+            if (index <= safeText.length) {
+              setTimeout(typeNext, 120);
+            } else {
+              line.complete = true;
+              resolve();
+            }
+          } else {
+            resolve();
+          }
+        };
+        typeNext();
+      });
+    },
+    startPulseAnimation() {
+      const animatePulse = (timestamp) => {
+        const intensity = Math.sin(timestamp / 250) * 0.08 + 0.18;
+        document.documentElement.style.setProperty('--border', `rgba(12, 16, 35, ${0.08 + intensity})`);
+        this.pulseFrame = requestAnimationFrame(animatePulse);
       };
-
-      typeNext();
-    });
-
-  (async () => {
-    await sleep(400);
-    for (const line of typingLines) {
-      await typeLine(line);
-    }
-  })();
-}
+      this.pulseFrame = requestAnimationFrame(animatePulse);
+    },
+    stopPulseAnimation() {
+      if (this.pulseFrame) {
+        cancelAnimationFrame(this.pulseFrame);
+        this.pulseFrame = null;
+      }
+    },
+  },
+  watch: {
+    currentLanguage(newLang) {
+      document.documentElement.setAttribute('lang', newLang);
+      this.languageMenuOpen = false;
+      this.heroLines = this.heroLineKeysFor(newLang).map((key) => ({ key, typed: '', complete: false }));
+      this.runTypingSequence();
+    },
+  },
+  mounted() {
+    document.addEventListener('click', this.onDocumentClick);
+    document.documentElement.setAttribute('lang', this.currentLanguage);
+    this.startPulseAnimation();
+    this.runTypingSequence();
+  },
+  beforeUnmount() {
+    document.removeEventListener('click', this.onDocumentClick);
+    this.stopPulseAnimation();
+  },
+}).mount('#app');
