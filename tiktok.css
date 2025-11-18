@@ -181,6 +181,7 @@ body::before {
   flex-wrap: wrap;
   gap: 16px;
   margin: 32px 0;
+  justify-content: flex-end;
 }
 
 .btn {
@@ -192,6 +193,7 @@ body::before {
   color: var(--text);
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+  text-decoration: none;
 }
 
 .btn.primary {

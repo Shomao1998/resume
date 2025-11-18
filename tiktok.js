@@ -1,5 +1,4 @@
 const glowCards = document.querySelectorAll('.glow-card');
-const trigger = document.getElementById('pulse-trigger');
 
 function handlePointer(e) {
   const target = e.currentTarget;
@@ -13,13 +12,6 @@ function handlePointer(e) {
 glowCards.forEach((card) => {
   card.addEventListener('pointermove', handlePointer);
 });
-
-if (trigger) {
-  trigger.addEventListener('click', () => {
-    document.body.classList.add('pulse');
-    setTimeout(() => document.body.classList.remove('pulse'), 1200);
-  });
-}
 
 let pulseFrame = null;
 function animatePulse(timestamp) {

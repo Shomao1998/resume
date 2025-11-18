@@ -1,22 +1,22 @@
-# Resume · Notion Minimal & TikTok Light
+# Resume · TikTok Tech Edition
 
-Single repository hosts two static personal landing pages: a Notion-inspired minimal profile and a bright TikTok-tech vibe homepage tailored for Xinrou.
+This repository now focuses solely on Xinrou's TikTok-inspired interactive resume. The layout features a neon hero section, featured projects, an experience timeline, skill highlights, offered services, and contact channels.
 
 ## Preview locally
 
 ```bash
 npx serve .
-# or open index.html / tiktok.html directly in the browser
+# or open index.html directly in the browser
 ```
 
 ## Files
-- `index.html` / `style.css` / `script.js`: Notion-like layout with hero, abilities, timeline, project highlights, and contact CTA plus theme toggle.
-- `tiktok.html` / `tiktok.css` / `tiktok.js`: TikTok-styled hero with portrait rail, project introduction, experience journey, skill cards, services, and contact section.
+- `index.html`: TikTok-styled hero with portrait rail, project introduction, experience journey, skill cards, services, and contact section.
+- `tiktok.css` / `tiktok.js`: Styles and micro-interactions (glow effects, grid pulse, button animation) for the TikTok theme.
 
 ## Customize
-- Update text content directly in each HTML file—copy is grouped by section for easier edits.
-- Replace the hero portrait placeholder inside `.hero-media` with a `<img>` tag pointing to your image.
-- Adjust palette or animation speeds via CSS variables declared at the top of each stylesheet.
+- Update text content directly in `index.html`—copy is grouped by section for easier edits.
+- Replace the hero portrait placeholder inside `.hero-media` with an `<img>` tag pointing to your image.
+- Adjust palette or animation speeds via CSS variables declared at the top of `tiktok.css`.
 
 ## Version control workflow
 Use the following commands to stage, commit, and push future tweaks as you continue refining the copy or assets:
