@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikTok Tech · Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Orbitron:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="tiktok.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <header class="tk-hero">
+    <nav class="tk-nav">
+      <span class="logo">XR · LAB</span>
+      <div class="nav-links">
+        <a href="#labs">Projects</a>
+        <a href="#timeline">Journey</a>
+        <a href="#connect">Connect</a>
+      </div>
+      <a class="btn outline" href="index.html">Back to Notion</a>
+    </nav>
+    <div class="tk-hero__layout">
+      <div class="hero-media">
+        <div class="photo-frame" aria-hidden="true">
+          <div class="photo-glow"></div>
+          <div class="photo-placeholder">Your Portrait</div>
+        </div>
+      </div>
+      <div class="tk-hero__content">
+        <p class="eyebrow">// CREATIVE TECHNOLOGY DESIGNER</p>
+        <h1>I'm Xinrou</h1>
+        <p class="lead">
+          I build immersive stories for the TikTok universe where motion, music, and code blend into shoppable and interactive moments.
+        </p>
+        <div class="cta-group">
+          <a class="btn primary" href="#connect">Contact Me</a>
+          <button class="btn ghost" id="pulse-trigger" type="button">Highlight Pulse</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="labs" class="panel">
+      <div class="panel__header">
+        <p class="eyebrow">FEATURED PROJECTS</p>
+        <h2>Project Highlights</h2>
+      </div>
+      <div class="cards">
+        <article class="glow-card">
+          <div class="tag">LIVE-AI</div>
+          <h3>Neon Pulse Studio</h3>
+          <p>An interactive live room where GPT agents remix prompts, beats, and lights in real time.</p>
+          <span>2024 · Beta</span>
+        </article>
+        <article class="glow-card">
+          <div class="tag">AR</div>
+          <h3>Holo Loop</h3>
+          <p>A wearable particle loop crafted with WebAR and Effect House that shifts colors with every beat.</p>
+          <span>2023 · Launch</span>
+        </article>
+        <article class="glow-card">
+          <div class="tag">DATA</div>
+          <h3>Creator Radar</h3>
+          <p>A signal board combining TikTok API stats, commerce conversion, and content insights for brands.</p>
+          <span>2022 · SaaS</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="timeline" class="panel timeline">
+      <div class="panel__header">
+        <p class="eyebrow">EXPERIENCE</p>
+        <h2>Experience Journey</h2>
+      </div>
+      <ol>
+        <li>
+          <div class="dot"></div>
+          <div>
+            <h3>2023 - Now · Creative Tech Lead</h3>
+            <p>Designing commerce-ready livestream systems with AI scene direction and automated overlays.</p>
+          </div>
+        </li>
+        <li>
+          <div class="dot"></div>
+          <div>
+            <h3>2021 - 2023 · Product Storyteller</h3>
+            <p>Directed TikTok-first campaign narratives for lifestyle brands entering short-video ecosystems.</p>
+          </div>
+        </li>
+        <li>
+          <div class="dot"></div>
+          <div>
+            <h3>2019 - 2021 · Immersive Developer</h3>
+            <p>Built AR filters, motion capture puppets, and interactive microsites with cross-device syncing.</p>
+          </div>
+        </li>
+        <li>
+          <div class="dot"></div>
+          <div>
+            <h3>2017 - 2019 · Visual Designer</h3>
+            <p>Crafted kinetic typography packages and festival visuals for entertainment & tech partners.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="panel skills">
+      <div class="panel__header">
+        <p class="eyebrow">SKILL SET</p>
+        <h2>Languages & Capabilities</h2>
+      </div>
+      <div class="skills-grid">
+        <article class="skill-card">
+          <h3>Language Skill</h3>
+          <ul>
+            <li>Native Mandarin for scripting & hosting</li>
+            <li>Professional English for campaigns</li>
+            <li>Conversational Japanese for partner sync</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>Programming Skill</h3>
+          <ul>
+            <li>TypeScript / React / Next.js frontends</li>
+            <li>Three.js, WebGL, and shader animation</li>
+            <li>Node.js automation & AI toolchains</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>Professional Skill</h3>
+          <ul>
+            <li>Creative direction & interactive storytelling</li>
+            <li>Campaign measurement & content ops</li>
+            <li>Client workshop facilitation</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel split">
+      <div class="split-card">
+        <p class="eyebrow">SERVICES</p>
+        <h2>What I Offer</h2>
+        <ul>
+          <li>AI-assisted livestream & interactive production</li>
+          <li>Creator landing pages & immersive microsites</li>
+          <li>Music-driven motion design and edits</li>
+          <li>Data-backed content retrospectives</li>
+        </ul>
+      </div>
+      <div class="split-card" id="connect">
+        <p class="eyebrow">CONNECT</p>
+        <h2>Let’s Work Together</h2>
+        <p>Ready to accelerate your next campaign? Reach out anytime via the channels below.</p>
+        <div class="contact-grid">
+          <div>
+            <span>Mail</span>
+            <a href="mailto:hello@limuyang.design">hello@limuyang.design</a>
+          </div>
+          <div>
+            <span>WeChat</span>
+            <code>limuyang</code>
+          </div>
+          <div>
+            <span>Instagram</span>
+            <a href="https://instagram.com/limuyang" target="_blank" rel="noreferrer">@limuyang</a>
+          </div>
+          <div>
+            <span>TikTok</span>
+            <a href="https://www.tiktok.com/@limuyang" target="_blank" rel="noreferrer">@limuyang</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tk-footer">
+    <p>© 2024 Xinrou · TikTok Tech Edition</p>
+  </footer>
+
+  <script src="tiktok.js"></script>
+</body>
+</html>
