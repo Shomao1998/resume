@@ -30,7 +30,7 @@ git remote add origin <git-url>
 git status                   # review changes
 git add <files>              # stage updates
 git commit -m "feat: ..."    # create a descriptive commit
-git push --set-upstream origin work   # publish to the current branch
+git push --set-upstream origin main   # publish to the main branch the first time
 ```
 
-If the remote has already been configured, replace the last command with `git push` or `git push origin work`.
+If the remote has already been configured, replace the last command with `git push` or `git push origin main`.
