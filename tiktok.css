@@ -163,10 +163,15 @@ body::before {
 .hero-title-block {
   display: inline-flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: max-content;
+  align-items: stretch;
+  width: min(100%, 640px);
   gap: 16px;
   text-align: left;
+}
+
+.typing-title,
+.hero-title-block .lead {
+  width: 100%;
 }
 
 .eyebrow {
@@ -227,7 +232,7 @@ body::before {
 
 .hero-title-block .lead {
   margin: 0;
-  max-width: 440px;
+  max-width: none;
 }
 
 .cta-group {
@@ -265,6 +270,17 @@ body::before {
   z-index: 1;
 }
 
+.btn.icon .cv-label {
+  font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: currentColor;
+  position: relative;
+  z-index: 1;
+}
+
 .btn.icon::after {
   content: '';
   position: absolute;
@@ -289,6 +305,10 @@ body::before {
   background: transparent;
   color: #3a3a3a;
   box-shadow: none;
+}
+
+.btn.icon.cv {
+  width: 48px;
 }
 
 .btn.icon.linkedin:hover,
