@@ -2,6 +2,8 @@
 
 This repository now focuses solely on Xinrou's TikTok-inspired interactive resume. The layout features a neon hero section, featured projects, an experience timeline, skill highlights, offered services, and contact channels.
 
+欢迎来到xinrou的主页，前产品经理和咨询顾问，我在这里介绍我的旅程，欢迎联系我。
+
 ## Preview locally
 
 ```bash
