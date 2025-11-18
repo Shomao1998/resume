@@ -184,6 +184,13 @@ body::before {
 
 .typing-title {
   display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.typing-line {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   white-space: nowrap;
@@ -243,14 +250,50 @@ body::before {
   align-items: center;
   justify-content: center;
   border-radius: 16px;
+  position: relative;
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(12, 16, 35, 0.12);
+  border: 1px solid rgba(12, 16, 35, 0.15);
+  border-image-slice: 1;
 }
 
 .btn.icon svg {
   width: 22px;
   height: 22px;
   fill: currentColor;
+  position: relative;
+  z-index: 1;
+}
+
+.btn.icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, var(--accent-pink), var(--accent-cyan), var(--accent-purple));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.btn.icon:hover::after {
+  opacity: 1;
+}
+
+.btn.icon.linkedin,
+.btn.icon.github {
+  background: transparent;
+  color: #3a3a3a;
+  box-shadow: none;
+}
+
+.btn.icon.linkedin:hover,
+.btn.icon.github:hover {
+  background: transparent;
+  box-shadow: none;
 }
 
 .language-switcher {

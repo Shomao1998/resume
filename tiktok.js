@@ -64,25 +64,46 @@ if (languageSwitcher) {
   });
 }
 
-const typingText = document.querySelector('.typing-text');
-const typingCaret = document.querySelector('.typing-caret');
+const typingLines = document.querySelectorAll('.typing-line');
 
-if (typingText) {
-  const fullText = typingText.dataset.text?.trim() || typingText.textContent.trim();
-  let index = 0;
+if (typingLines.length) {
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  typingText.textContent = '';
+  const typeLine = (line) =>
+    new Promise((resolve) => {
+      const textEl = line.querySelector('.typing-text');
+      const caretEl = line.querySelector('.typing-caret');
+      const fullText = textEl?.dataset.text?.trim() || textEl?.textContent?.trim() || '';
+      let index = 0;
 
-  const typeNext = () => {
-    if (index <= fullText.length) {
-      typingText.textContent = fullText.slice(0, index);
-      index += 1;
-      setTimeout(typeNext, 120);
-    } else {
-      typingText.classList.add('typing-complete');
-      typingCaret?.classList.add('paused');
+      if (textEl) {
+        textEl.textContent = '';
+      }
+
+      const typeNext = () => {
+        if (!textEl) {
+          resolve();
+          return;
+        }
+
+        if (index <= fullText.length) {
+          textEl.textContent = fullText.slice(0, index);
+          index += 1;
+          setTimeout(typeNext, 120);
+        } else {
+          textEl.classList.add('typing-complete');
+          caretEl?.classList.add('paused');
+          resolve();
+        }
+      };
+
+      typeNext();
+    });
+
+  (async () => {
+    await sleep(400);
+    for (const line of typingLines) {
+      await typeLine(line);
     }
-  };
-
-  setTimeout(typeNext, 400);
+  })();
 }
