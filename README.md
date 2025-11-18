@@ -34,3 +34,11 @@ git push --set-upstream origin main   # publish to the main branch the first tim
 ```
 
 If the remote has already been configured, replace the last command with `git push` or `git push origin main`.
+
+## 如何推送到 Git（Push to Git）
+1. **配置远程仓库**：只需运行 `git remote add origin <你的仓库地址>`，把本地代码与 Git 仓库关联。
+2. **确认分支**：使用 `git branch --show-current` 查看当前分支。如需新分支，可 `git checkout -b feature/resume-update`。
+3. **提交改动**：执行 `git status` 查看更改，随后 `git add <文件>` 和 `git commit -m "描述信息"`。
+4. **推送到远端**：首次推送分支时运行 `git push -u origin <分支名>`。之后同一分支仅需 `git push` 即可同步。
+
+> 小提示：如果推送被拒绝，先 `git pull --rebase origin <分支名>` 同步远端最新提交，再重新 `git push`。

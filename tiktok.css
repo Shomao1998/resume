@@ -284,14 +284,16 @@ body::before {
 }
 
 .btn.icon.linkedin,
-.btn.icon.github {
+.btn.icon.github,
+.btn.icon.cv {
   background: transparent;
   color: #3a3a3a;
   box-shadow: none;
 }
 
 .btn.icon.linkedin:hover,
-.btn.icon.github:hover {
+.btn.icon.github:hover,
+.btn.icon.cv:hover {
   background: transparent;
   box-shadow: none;
 }

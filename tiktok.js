@@ -9,7 +9,7 @@ const translations = {
     'hero.greeting': 'Hi,',
     'hero.name': "I'm Xinrou",
     'hero.lead': 'Embracing the world and its endless possibilities, I long to spread happiness to those who walk with me.',
-    'hero.resume': 'resume',
+    'hero.contact': 'Contact Me',
     'labs.title': 'Project Highlights',
     'labs.card1.tag': 'LIVE-AI',
     'labs.card1.title': 'Neon Pulse Studio',
@@ -65,7 +65,7 @@ const translations = {
     'hero.greeting': '你好，',
     'hero.name': '我是Xinrou',
     'hero.lead': '拥抱世界，探索生活的每一种可能，我想把快乐带给身边的人。',
-    'hero.resume': '简历',
+    'hero.contact': '联系我',
     'labs.title': '项目亮点',
     'labs.card1.tag': 'LIVE-AI',
     'labs.card1.title': '霓虹脉冲工作室',
@@ -119,9 +119,9 @@ const translations = {
     'nav.journey': '経歴',
     'nav.contact': '連絡先',
     'hero.greeting': 'こんにちは、',
-    'hero.name': "I'm Xinrou",
+    'hero.name': 'Xinrouです',
     'hero.lead': '世界を胸に抱き、人生の無限の可能性を旅しつつ、皆んなに幸せを届けたい。',
-    'hero.resume': '履歴書',
+    'hero.contact': 'お問い合わせ',
     'labs.title': 'プロジェクトハイライト',
     'labs.card1.tag': 'LIVE-AI',
     'labs.card1.title': 'ネオンパルススタジオ',
@@ -179,7 +179,6 @@ const navLinks = [
 
 const heroLineKeysByLanguage = {
   default: ['hero.greeting', 'hero.name'],
-  ja: ['hero.title.full'],
 };
 
 const getHeroLineKeys = (language) => heroLineKeysByLanguage[language] || heroLineKeysByLanguage.default;
