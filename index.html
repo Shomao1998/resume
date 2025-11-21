@@ -103,7 +103,7 @@
               >
                 <span class="cv-label" aria-hidden="true">cv</span>
               </a>
-              <a class="btn primary" href="#connect">
+              <a class="btn primary" href="#contact">
                 {{ t('hero.contact') }}
               </a>
             </div>
@@ -113,6 +113,73 @@
     </header>
 
     <main>
+      <section id="about-chat" class="panel about-chat">
+        <div class="about-chat__layout">
+          <div class="about-card">
+            <h2>{{ t('split.offer.title') }}</h2>
+            <div class="about-grid">
+              <article class="about-pill" v-for="offerKey in offerings" :key="offerKey">
+                <p>{{ t(offerKey) }}</p>
+              </article>
+            </div>
+          </div>
+          <div class="chat-shell">
+            <div class="panel__header">
+              <h2>{{ t('chatbot.title') }}</h2>
+              <p class="lead">{{ t('chatbot.lead') }}</p>
+            </div>
+            <div class="chat-dialog">
+              <div class="chat-dialog__meta">
+                <label class="input-label" for="api-key">{{ t('chatbot.api.placeholder') }}</label>
+                <input
+                  id="api-key"
+                  class="text-input"
+                  type="password"
+                  autocomplete="off"
+                  v-model="apiKey"
+                  :aria-label="t('chatbot.api.placeholder')"
+                />
+                <p class="chat-note">{{ t('chatbot.note') }}</p>
+                <div class="quick-questions inline">
+                  <button
+                    v-for="questionKey in quickQuestionKeys"
+                    :key="questionKey"
+                    type="button"
+                    class="quick-question quick-question--small"
+                    @click="askQuickQuestion(questionKey)"
+                  >
+                    {{ t(questionKey) }}
+                  </button>
+                </div>
+              </div>
+              <div class="chat-stream">
+                <div
+                  v-for="(message, index) in chatMessages"
+                  :key="index"
+                  class="chat-message"
+                  :data-role="message.role"
+                >
+                  <div class="chat-message__meta">{{ message.role === 'assistant' ? 'AI' : 'You' }}</div>
+                  <p>{{ message.content }}</p>
+                </div>
+                <div v-if="isChatLoading" class="chat-loading">...</div>
+              </div>
+              <form class="chat-input" @submit.prevent="sendMessage">
+                <input
+                  class="text-input"
+                  v-model="chatInput"
+                  :aria-label="t('chatbot.input.placeholder')"
+                  autocomplete="off"
+                />
+                <button class="btn primary" type="submit" :disabled="isChatLoading">
+                  {{ isChatLoading ? '...' : t('chatbot.send') }}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="labs" class="panel">
         <div class="panel__header">
           <h2>{{ t('labs.title') }}</h2>
@@ -161,21 +228,70 @@
         </div>
       </section>
 
-      <section class="panel split">
-        <div class="split-card">
-          <h2>{{ t('split.offer.title') }}</h2>
-          <ul>
-            <li v-for="offerKey in offerings" :key="offerKey">{{ t(offerKey) }}</li>
-          </ul>
-        </div>
-        <div class="split-card" id="connect">
+      <section id="contact" class="panel contact-panel">
+        <div class="panel__header">
           <h2>{{ t('split.contact.title') }}</h2>
-          <p>{{ t('split.contact.body') }}</p>
-          <div class="contact-grid">
-            <div>
-              <span>{{ t('split.contact.mail') }}</span>
-              <a href="mailto:xinrou.dong@outlook.com">xinrou.dong@outlook.com</a>
-            </div>
+          <p class="lead">{{ t('split.contact.body') }}</p>
+        </div>
+        <div class="contact-table__wrapper">
+          <table class="contact-table">
+            <caption>{{ t('contact.table.title') }}</caption>
+            <tbody>
+              <tr>
+                <th scope="row">{{ t('contact.table.name') }}</th>
+                <td>
+                  <div class="inline-fields">
+                    <label class="inline-field__label">
+                      {{ t('contact.table.firstName') }}<span class="required-star" aria-hidden="true">*</span>
+                      <input
+                        class="text-input"
+                        type="text"
+                        v-model="contactForm.firstName"
+                        :aria-label="t('contact.table.firstName')"
+                        required
+                      />
+                    </label>
+                    <label class="inline-field__label">
+                      {{ t('contact.table.lastName') }}<span class="required-star" aria-hidden="true">*</span>
+                      <input
+                        class="text-input"
+                        type="text"
+                        v-model="contactForm.lastName"
+                        :aria-label="t('contact.table.lastName')"
+                        required
+                      />
+                    </label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">{{ t('contact.table.org') }}</th>
+                <td>
+                  <input
+                    class="text-input"
+                    v-model="contactForm.org"
+                    :aria-label="t('contact.table.org')"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">{{ t('contact.table.message') }}</th>
+                <td>
+                  <textarea
+                    class="text-input"
+                    rows="3"
+                    v-model="contactForm.message"
+                    :aria-label="t('contact.table.message')"
+                  ></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="contact-table__actions">
+            <button class="btn primary" type="button" @click="submitContactForm()">
+              {{ t('contact.table.submit') }}
+            </button>
+            <p class="chat-note">{{ t('contact.table.helper') }}</p>
           </div>
         </div>
       </section>

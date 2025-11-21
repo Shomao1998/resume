@@ -45,7 +45,7 @@ const translations = {
     'skills.professional.item1': 'Creative direction & interactive storytelling',
     'skills.professional.item2': 'Campaign measurement & content ops',
     'skills.professional.item3': 'Client workshop facilitation',
-    'split.offer.title': 'I‘m',
+    'split.offer.title': 'This is me',
     'split.offer.item1': 'A passionate partner',
     'split.offer.item2': "A friend who's endlessly curious about the world",
     'split.offer.item3': 'A globally minded multilingual communicator',
@@ -54,6 +54,28 @@ const translations = {
     'split.contact.body': "Please feel free to contact me anytime—I'm very happy to meet and chat with you.",
     'split.contact.mail': 'Mail',
     'footer.copy': '© 2025 Xinrou · My Page',
+    'chatbot.title': 'Chat with me',
+    'chatbot.lead': 'Ask anything about my work, interests, or ideas. Pre-filled cards help you start quickly.',
+    'chatbot.input.placeholder': 'Type your question...',
+    'chatbot.api.placeholder': 'Enter your OpenAI API key to chat securely on your device',
+    'chatbot.send': 'Send',
+    'chatbot.quick.q1': 'What is your future career aspiration?',
+    'chatbot.quick.q2': 'What steps have you taken toward it?',
+    'chatbot.quick.q3': "Want to grab a coffee chat?",
+    'chatbot.welcome': "Nice to chat with you! I'm Xinrou—what would you like to ask me?",
+    'chatbot.noKey': 'Please paste an OpenAI API key first. Your key stays in your browser.',
+    'chatbot.error': 'Oops, I could not reach the model. Please try again.',
+    'chatbot.empty': 'I did not get a response. Could you retry?',
+    'chatbot.systemPrompt': "You are Xinrou's friendly assistant. Answer concisely, warmly, and invite collaboration.",
+    'chatbot.note': 'The chatbot runs client-side. Your API key is never stored or sent anywhere else.',
+    'contact.table.title': 'Leave your info for a quick follow-up',
+    'contact.table.name': 'Name',
+    'contact.table.firstName': 'First name',
+    'contact.table.lastName': 'Family name',
+    'contact.table.org': 'Organization name',
+    'contact.table.message': 'Inquiry',
+    'contact.table.submit': 'Draft email',
+    'contact.table.helper': 'A mail draft will open with your details. Feel free to edit before sending.',
   },
   zh: {
     'lang.option.en': '英文',
@@ -101,7 +123,7 @@ const translations = {
     'skills.professional.item1': '创意统筹与互动叙事',
     'skills.professional.item2': '活动效果衡量与内容运营',
     'skills.professional.item3': '客户工作坊引导',
-    'split.offer.title': '我是一个',
+    'split.offer.title': '这就是我',
     'split.offer.item1': '充满热情的合作对象',
     'split.offer.item2': '对世界保持好奇的朋友',
     'split.offer.item3': '具备全球视野的多语沟通者',
@@ -110,6 +132,28 @@ const translations = {
     'split.contact.body': '欢迎随时与我联系——我很期待与你相遇交流。',
     'split.contact.mail': '邮箱',
     'footer.copy': '© 2025 Xinrou · My Page',
+    'chatbot.title': '和我聊天',
+    'chatbot.lead': '想了解我的工作、兴趣或想法？点击常用问题卡或直接提问。',
+    'chatbot.input.placeholder': '请输入你的问题…',
+    'chatbot.api.placeholder': '输入你的 OpenAI API Key（仅保留在本地浏览器）',
+    'chatbot.send': '发送',
+    'chatbot.quick.q1': '你将来的职业理想是什么？',
+    'chatbot.quick.q2': '你做了哪些努力？',
+    'chatbot.quick.q3': '来约一个 Coffee Chat 吧！',
+    'chatbot.welcome': '很高兴与你聊天！我是Xinrou，你有什么想问我的吗？',
+    'chatbot.noKey': '请先粘贴你的 OpenAI API Key，密钥只会保存在浏览器中。',
+    'chatbot.error': '抱歉，暂时无法连接模型，请稍后再试。',
+    'chatbot.empty': '没有收到回复，可以再试一次吗？',
+    'chatbot.systemPrompt': '你是 Xinrou 的友好助手，请简洁、温暖地回答，并邀请对方合作。',
+    'chatbot.note': '聊天完全在本地浏览器中运行，API Key 不会被保存或上传。',
+    'contact.table.title': '留下信息，我会尽快联系你',
+    'contact.table.name': '姓名',
+    'contact.table.firstName': '名',
+    'contact.table.lastName': '姓',
+    'contact.table.org': '组织名称',
+    'contact.table.message': '咨询内容',
+    'contact.table.submit': '生成邮件',
+    'contact.table.helper': '点击后会打开邮件草稿，你可以在发送前自由修改。',
   },
   ja: {
     'lang.option.en': '英語',
@@ -157,7 +201,7 @@ const translations = {
     'skills.professional.item1': 'クリエイティブディレクションとインタラクティブストーリーテリング',
     'skills.professional.item2': 'キャンペーン計測とコンテンツ運用',
     'skills.professional.item3': 'クライアントワークショップのファシリテーション',
-    'split.offer.title': '私は',
+    'split.offer.title': 'これが私',
     'split.offer.item1': '情熱的なパートナー',
     'split.offer.item2': '世界への好奇心が尽きない友人',
     'split.offer.item3': 'グローバル志向のマルチリンガルコミュニケーター',
@@ -166,15 +210,42 @@ const translations = {
     'split.contact.body': 'いつでもお気軽にご連絡ください。お話しできるのを楽しみにしています。',
     'split.contact.mail': 'メールアドレス',
     'footer.copy': '©2025 Xinrou · My Page',
+    'chatbot.title': '私と話そう',
+    'chatbot.lead': '私の仕事や興味、アイデアについて気軽に質問してください。カードからも始められます。',
+    'chatbot.input.placeholder': '質問を書いてください…',
+    'chatbot.api.placeholder': 'OpenAI APIキーを入力（ブラウザにのみ保存されます）',
+    'chatbot.send': '送信',
+    'chatbot.quick.q1': '将来のキャリアの理想は何ですか？',
+    'chatbot.quick.q2': 'そのためにどんな努力をしましたか？',
+    'chatbot.quick.q3': 'コーヒーチャットをしませんか？',
+    'chatbot.welcome': 'お話しできて嬉しいです！Xinrouです。何を聞いてみたいですか？',
+    'chatbot.noKey': 'まず OpenAI API キーを入力してください。キーはブラウザにのみ保持されます。',
+    'chatbot.error': '接続に失敗しました。時間をおいて再試行してください。',
+    'chatbot.empty': '返信が得られませんでした。もう一度試せますか？',
+    'chatbot.systemPrompt': 'あなたは Xinrou のフレンドリーなアシスタントです。簡潔かつ温かく、コラボに誘う形で答えてください。',
+    'chatbot.note': 'チャット処理はブラウザ内だけで完結し、APIキーは保存・送信されません。',
+    'contact.table.title': '連絡先を残してください、すぐお返事します',
+    'contact.table.name': 'お名前',
+    'contact.table.firstName': '名',
+    'contact.table.lastName': '姓',
+    'contact.table.org': '所属・組織名',
+    'contact.table.message': 'お問い合わせ内容',
+    'contact.table.submit': 'メール下書きを作成',
+    'contact.table.helper': 'クリックするとメール下書きが開きます。送信前に自由に編集してください。',
   },
 };
 
 const DEFAULT_LANGUAGE = 'en';
 
+const translateWithLang = (key, language) => {
+  const fallback = translations[DEFAULT_LANGUAGE] || {};
+  return translations[language]?.[key] ?? fallback[key] ?? key;
+};
+
 const navLinks = [
   { href: '#labs', key: 'nav.projects' },
   { href: '#timeline', key: 'nav.journey' },
-  { href: '#connect', key: 'nav.contact' },
+  { href: '#contact', key: 'nav.contact' },
 ];
 
 const heroLineKeysByLanguage = {
@@ -185,6 +256,8 @@ const getHeroLineKeys = (language) => heroLineKeysByLanguage[language] || heroLi
 
 const createHeroLineState = (language) =>
   getHeroLineKeys(language).map((key) => ({ key, typed: '', complete: false }));
+
+const quickQuestionKeys = ['chatbot.quick.q1', 'chatbot.quick.q2', 'chatbot.quick.q3'];
 
 const labsCards = [
   {
@@ -241,8 +314,9 @@ const offerings = [
 
 const { createApp } = Vue;
 
-createApp({
+const app = createApp({
   data() {
+    const initialLanguage = document.documentElement.lang || DEFAULT_LANGUAGE;
     return {
       navLinks,
       labsCards,
@@ -250,11 +324,22 @@ createApp({
       skills,
       offerings,
       languages: ['en', 'ja', 'zh'],
-      currentLanguage: document.documentElement.lang || DEFAULT_LANGUAGE,
+      currentLanguage: initialLanguage,
       languageMenuOpen: false,
-      heroLines: createHeroLineState(document.documentElement.lang || DEFAULT_LANGUAGE),
+      heroLines: createHeroLineState(initialLanguage),
       pulseFrame: null,
       typingRunId: 0,
+      chatMessages: [],
+      chatInput: '',
+      apiKey: '',
+      isChatLoading: false,
+      quickQuestionKeys,
+      contactForm: {
+        firstName: '',
+        lastName: '',
+        org: '',
+        message: '',
+      },
     };
   },
   computed: {
@@ -353,6 +438,62 @@ createApp({
         this.pulseFrame = null;
       }
     },
+    async sendMessage() {
+      const content = this.chatInput.trim();
+      if (!content || this.isChatLoading) return;
+      this.chatMessages.push({ role: 'user', content });
+      this.chatInput = '';
+
+      if (!this.apiKey.trim()) {
+        this.chatMessages.push({ role: 'assistant', content: this.t('chatbot.noKey') });
+        return;
+      }
+
+      this.isChatLoading = true;
+      try {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.apiKey.trim()}`,
+          },
+          body: JSON.stringify({
+            model: 'gpt-4o-mini',
+            messages: [
+              { role: 'system', content: this.t('chatbot.systemPrompt') },
+              ...this.chatMessages.map((message) => ({ role: message.role, content: message.content })),
+            ],
+            temperature: 0.6,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const reply = data?.choices?.[0]?.message?.content?.trim();
+        this.chatMessages.push({ role: 'assistant', content: reply || this.t('chatbot.empty') });
+      } catch (error) {
+        this.chatMessages.push({ role: 'assistant', content: `${this.t('chatbot.error')} ${error?.message ?? ''}`.trim() });
+      } finally {
+        this.isChatLoading = false;
+      }
+    },
+    askQuickQuestion(questionKey) {
+      const text = this.t(questionKey);
+      this.chatInput = text;
+      this.sendMessage();
+    },
+    submitContactForm() {
+      const { firstName, lastName, org, message } = this.contactForm;
+      const displayName = [firstName, lastName].filter(Boolean).join(' ').trim();
+      const subject = encodeURIComponent(`${displayName || 'New friend'} · Inquiry`);
+      const body = encodeURIComponent(
+        `First name: ${firstName || '-'}\nFamily name: ${lastName || '-'}\nOrganization: ${org || '-'}\nInquiry: ${message || '-'}`,
+      );
+      window.location.href = `mailto:xinrou.dong@outlook.com?subject=${subject}&body=${body}`;
+    },
   },
   watch: {
     currentLanguage() {
@@ -371,4 +512,7 @@ createApp({
     document.removeEventListener('click', this.onDocumentClick);
     this.stopPulseAnimation();
   },
-}).mount('#app');
+});
+
+const appInstance = app.mount('#app');
+window.__app = appInstance;
