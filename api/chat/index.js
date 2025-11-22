@@ -1,4 +1,4 @@
-const { OpenAI } = require("openai");
+const OpenAI = require("openai");
 
 module.exports = async function (context, req) {
   try {
@@ -18,7 +18,7 @@ module.exports = async function (context, req) {
       defaultHeaders: {
         "api-key": process.env.AZURE_OPENAI_API_KEY,
       },
-      defaultQuery: { "api-version": "2024-02-15-preview" }
+      defaultQuery: { "api-version": "2024-12-01-preview" }
     });
 
     const response = await client.chat.completions.create({
