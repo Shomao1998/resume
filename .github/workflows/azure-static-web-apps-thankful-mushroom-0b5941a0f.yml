@@ -23,7 +23,7 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           # ★ Azure Static Web App 在你仓库 Settings → Secrets → Actions 里自动生成的那个 token
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_MUSHROOM_0B5941A0F }}
 
           # 让 Action 可以给 PR 评论等（自动生成的 GITHUB_TOKEN）
           repo_token: ${{ secrets.GITHUB_TOKEN }}
