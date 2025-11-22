@@ -37,6 +37,12 @@ The deployed chatbot is wired to the Azure OpenAI resource shown in your deploym
 
 These values are also used as defaults by the Azure Function if no environment overrides are provided.
 
+## Azure Static Web Apps token
+Deployment requires a valid Static Web Apps API token. The workflow now checks for the portal-generated secret name first
+(`AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_MUSHROOM_0B5941A0F`) and falls back to your custom token name
+(`AZURE_STATIC_WEB_APPS_API_TOKEN`). If deployments are failing with `BadRequest` or "No matching Static Web App was found,"
+confirm that at least one of these repository secrets is populated with the latest token copied from the Azure portal.
+
 ## Version control workflow
 Use the following commands to stage, commit, and push future tweaks as you continue refining the copy or assets:
 
