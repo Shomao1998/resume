@@ -3,7 +3,7 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - main          # 如果你不是用 main 分支，这里要改成你的分支名
+      - main
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -22,23 +22,21 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # ★ Azure Static Web App 在你仓库 Settings → Secrets → Actions 里自动生成的那个 token
-          azure_static_web_apps_api_token: ${{ AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_MUSHROOM_0B5941A0F }}
-
-          # 让 Action 可以给 PR 评论等（自动生成的 GITHUB_TOKEN）
+          # ✅ 使用你在 GitHub 里新建/确认存在的这个 secret
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
 
-          # ★ 必填：上传代码
+          # 必填动作
           action: "upload"
 
-          # === 路径配置（和你当前目录结构一一对应） ===
-          app_location: "/"        # index.html 在仓库根目录
-          api_location: "api"      # Azure Functions API 在 /api 下
-          output_location: "/"     # 没有前端 build 产物，保持 "/"
+          # 跟你的项目结构匹配
+          app_location: "/"        # index.html 在根目录
+          api_location: "api"      # Functions API 在 /api
+          output_location: "/"     
 
-          # 你是纯静态 HTML 前端，不需要 npm build，但 API 需要构建
-          skip_app_build: true     # 不跑前端构建
-          skip_api_build: false    # 保持 false 才会打包 /api 函数
+          # 前端是纯静态 HTML，无需构建；API 需要构建
+          skip_app_build: true
+          skip_api_build: false
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -48,5 +46,5 @@ jobs:
       - name: Close Pull Request
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_MUSHROOM_0B5941A0F }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: "close"
