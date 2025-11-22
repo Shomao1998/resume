@@ -825,6 +825,13 @@ main {
   gap: 6px;
   font-size: 0.9rem;
   color: var(--muted);
+  position: relative;
+  padding-top: 4px;
+}
+
+.inline-field__label .label-text {
+  display: inline-block;
+  padding-right: 12px;
 }
 
 .inline-field__label .text-input {
@@ -833,7 +840,11 @@ main {
 
 .required-star {
   color: var(--accent-pink);
-  margin-left: 4px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.85rem;
+  line-height: 1;
 }
 
 .tk-footer {

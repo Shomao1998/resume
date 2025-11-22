@@ -32,7 +32,7 @@ jobs:
           # 跟你的项目结构匹配
           app_location: "/"        # index.html 在根目录
           api_location: "api"      # Functions API 在 /api
-          output_location: "/"     
+          output_location: ""       # 跳过前端构建时无需额外的输出目录
 
           # 前端是纯静态 HTML，无需构建；API 需要构建
           skip_app_build: true
