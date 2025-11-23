@@ -494,7 +494,7 @@ main {
 
 .about-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 12px;
   margin-top: 16px;
 }
@@ -825,6 +825,15 @@ main {
   gap: 6px;
   font-size: 0.9rem;
   color: var(--muted);
+  position: relative;
+}
+
+.label-text {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  width: fit-content;
+  padding-right: 12px;
 }
 
 .inline-field__label .text-input {
@@ -833,7 +842,10 @@ main {
 
 .required-star {
   color: var(--accent-pink);
-  margin-left: 4px;
+  position: absolute;
+  top: -0.4em;
+  right: -0.3em;
+  font-size: 0.9em;
 }
 
 .tk-footer {
