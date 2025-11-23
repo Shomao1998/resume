@@ -130,15 +130,6 @@
             </div>
             <div class="chat-dialog">
               <div class="chat-dialog__meta">
-                <label class="input-label" for="api-key">{{ t('chatbot.api.placeholder') }}</label>
-                <input
-                  id="api-key"
-                  class="text-input"
-                  type="password"
-                  autocomplete="off"
-                  v-model="apiKey"
-                  :aria-label="t('chatbot.api.placeholder')"
-                />
                 <p class="chat-note">{{ t('chatbot.note') }}</p>
                 <div class="quick-questions inline">
                   <button
@@ -169,6 +160,7 @@
                   class="text-input"
                   v-model="chatInput"
                   :aria-label="t('chatbot.input.placeholder')"
+                  :placeholder="t('chatbot.input.placeholder')"
                   autocomplete="off"
                 />
                 <button class="btn primary" type="submit" :disabled="isChatLoading">
@@ -242,7 +234,10 @@
                 <td>
                   <div class="inline-fields">
                     <label class="inline-field__label">
-                      {{ t('contact.table.firstName') }}<span class="required-star" aria-hidden="true">*</span>
+                      <span class="label-line">
+                        <span class="label-text">{{ t('contact.table.firstName') }}</span>
+                        <span class="required-star" aria-hidden="true">*</span>
+                      </span>
                       <input
                         class="text-input"
                         type="text"
@@ -252,7 +247,10 @@
                       />
                     </label>
                     <label class="inline-field__label">
-                      {{ t('contact.table.lastName') }}<span class="required-star" aria-hidden="true">*</span>
+                      <span class="label-line">
+                        <span class="label-text">{{ t('contact.table.lastName') }}</span>
+                        <span class="required-star" aria-hidden="true">*</span>
+                      </span>
                       <input
                         class="text-input"
                         type="text"
@@ -262,6 +260,24 @@
                       />
                     </label>
                   </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">{{ t('contact.table.email') }}</th>
+                <td>
+                  <label class="inline-field__label">
+                    <span class="label-line">
+                      <span class="label-text">{{ t('contact.table.email') }}</span>
+                      <span class="required-star" aria-hidden="true">*</span>
+                    </span>
+                    <input
+                      class="text-input"
+                      type="email"
+                      v-model="contactForm.email"
+                      :aria-label="t('contact.table.email')"
+                      required
+                    />
+                  </label>
                 </td>
               </tr>
               <tr>

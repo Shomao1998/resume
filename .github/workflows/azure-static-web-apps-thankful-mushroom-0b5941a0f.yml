@@ -22,8 +22,8 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # ✅ 使用你在 GitHub 里新建/确认存在的这个 secret
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          # ✅ 使用 Azure 自动生成的 token（或你的自定义 token 作为兜底）
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_MUSHROOM_0B5941A0F || secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
 
           # 必填动作
@@ -32,7 +32,7 @@ jobs:
           # 跟你的项目结构匹配
           app_location: "/"        # index.html 在根目录
           api_location: "api"      # Functions API 在 /api
-          output_location: "/"     
+          output_location: ""       # 跳过前端构建时无需额外的输出目录
 
           # 前端是纯静态 HTML，无需构建；API 需要构建
           skip_app_build: true
@@ -43,8 +43,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
-      - name: Close Pull Request
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          action: "close"
+        - name: Close Pull Request
+          uses: Azure/static-web-apps-deploy@v1
+          with:
+            azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_MUSHROOM_0B5941A0F || secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+            action: "close"

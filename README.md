@@ -11,6 +11,14 @@ npx serve .
 # or open index.html directly in the browser
 ```
 
+### Capture a fresh UI screenshot
+If you need to share the latest render without pushing a build, start a quick static server and use your favorite headless browser tool to capture a full-page image. For example:
+
+```bash
+python -m http.server 3000
+# then point Playwright/Puppeteer to http://localhost:3000 and take a full-page screenshot
+```
+
 ## Files
 - `index.html`: TikTok-styled hero with portrait rail, project introduction, experience journey, skill cards, services, and contact section.
 - `tiktok.css` / `tiktok.js`: Styles and micro-interactions (glow effects, grid pulse, button animation) for the TikTok theme.
@@ -18,6 +26,22 @@ npx serve .
 ## Customize
 - Update text content directly in `index.html`—copy is grouped by section for easier edits.
 - Adjust palette or animation speeds via CSS variables declared at the top of `tiktok.css`.
+
+## Azure OpenAI settings
+The deployed chatbot is wired to the Azure OpenAI resource shown in your deployment snapshot:
+
+- Endpoint: `https://personalsite-backend-openaiapi.cognitiveservices.azure.com`
+- Deployment name: `gpt-4o-mini`
+- API version: `2025-01-01-preview`
+- API key: store the portal key as `AZURE_OPENAI_API_KEY` in your Static Web Apps configuration (do not commit it to the repo).
+
+These values are also used as defaults by the Azure Function if no environment overrides are provided.
+
+## Azure Static Web Apps token
+Deployment requires a valid Static Web Apps API token. The workflow now checks for the portal-generated secret name first
+(`AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_MUSHROOM_0B5941A0F`) and falls back to your custom token name
+(`AZURE_STATIC_WEB_APPS_API_TOKEN`). If deployments are failing with `BadRequest` or "No matching Static Web App was found,"
+confirm that at least one of these repository secrets is populated with the latest token copied from the Azure portal.
 
 ## Version control workflow
 Use the following commands to stage, commit, and push future tweaks as you continue refining the copy or assets:
