@@ -57,24 +57,22 @@ const translations = {
     'chatbot.title': 'Chat with me',
     'chatbot.lead': 'Ask anything about my work, interests, or ideas. Pre-filled cards help you start quickly.',
     'chatbot.input.placeholder': 'Type your question...',
-    'chatbot.api.placeholder': 'Enter your OpenAI API key to chat securely on your device',
     'chatbot.send': 'Send',
     'chatbot.quick.q1': 'What is your future career aspiration?',
     'chatbot.quick.q2': 'What steps have you taken toward it?',
     'chatbot.quick.q3': "Want to grab a coffee chat?",
     'chatbot.welcome': "Nice to chat with you! I'm Xinrou—what would you like to ask me?",
-    'chatbot.noKey': 'Please paste an OpenAI API key first. Your key stays in your browser.',
     'chatbot.error': 'Oops, I could not reach the model. Please try again.',
     'chatbot.empty': 'I did not get a response. Could you retry?',
     'chatbot.systemPrompt': "You are Xinrou's friendly assistant. Answer concisely, warmly, and invite collaboration.",
-    'chatbot.note': 'The chatbot runs client-side. Your API key is never stored or sent anywhere else.',
     'contact.table.title': 'Leave your info for a quick follow-up',
     'contact.table.name': 'Name',
     'contact.table.firstName': 'First name',
-    'contact.table.lastName': 'Family name',
+    'contact.table.lastName': 'Last name',
+    'contact.table.email': 'Email',
     'contact.table.org': 'Organization name',
     'contact.table.message': 'Inquiry',
-    'contact.table.submit': 'Draft email',
+    'contact.table.submit': 'Send now',
     'contact.table.helper': 'A mail draft will open with your details. Feel free to edit before sending.',
   },
   zh: {
@@ -135,24 +133,22 @@ const translations = {
     'chatbot.title': '和我聊天',
     'chatbot.lead': '想了解我的工作、兴趣或想法？点击常用问题卡或直接提问。',
     'chatbot.input.placeholder': '请输入你的问题…',
-    'chatbot.api.placeholder': '输入你的 OpenAI API Key（仅保留在本地浏览器）',
     'chatbot.send': '发送',
     'chatbot.quick.q1': '你将来的职业理想是什么？',
     'chatbot.quick.q2': '你做了哪些努力？',
     'chatbot.quick.q3': '来约一个 Coffee Chat 吧！',
     'chatbot.welcome': '很高兴与你聊天！我是Xinrou，你有什么想问我的吗？',
-    'chatbot.noKey': '请先粘贴你的 OpenAI API Key，密钥只会保存在浏览器中。',
     'chatbot.error': '抱歉，暂时无法连接模型，请稍后再试。',
     'chatbot.empty': '没有收到回复，可以再试一次吗？',
     'chatbot.systemPrompt': '你是 Xinrou 的友好助手，请简洁、温暖地回答，并邀请对方合作。',
-    'chatbot.note': '聊天完全在本地浏览器中运行，API Key 不会被保存或上传。',
     'contact.table.title': '留下信息，我会尽快联系你',
     'contact.table.name': '姓名',
     'contact.table.firstName': '名',
     'contact.table.lastName': '姓',
+    'contact.table.email': '邮箱',
     'contact.table.org': '组织名称',
     'contact.table.message': '咨询内容',
-    'contact.table.submit': '生成邮件',
+    'contact.table.submit': '立即发送',
     'contact.table.helper': '点击后会打开邮件草稿，你可以在发送前自由修改。',
   },
   ja: {
@@ -213,24 +209,22 @@ const translations = {
     'chatbot.title': '私と話そう',
     'chatbot.lead': '私の仕事や興味、アイデアについて気軽に質問してください。カードからも始められます。',
     'chatbot.input.placeholder': '質問を書いてください…',
-    'chatbot.api.placeholder': 'OpenAI APIキーを入力（ブラウザにのみ保存されます）',
     'chatbot.send': '送信',
     'chatbot.quick.q1': '将来のキャリアの理想は何ですか？',
     'chatbot.quick.q2': 'そのためにどんな努力をしましたか？',
     'chatbot.quick.q3': 'コーヒーチャットをしませんか？',
     'chatbot.welcome': 'お話しできて嬉しいです！Xinrouです。何を聞いてみたいですか？',
-    'chatbot.noKey': 'まず OpenAI API キーを入力してください。キーはブラウザにのみ保持されます。',
     'chatbot.error': '接続に失敗しました。時間をおいて再試行してください。',
     'chatbot.empty': '返信が得られませんでした。もう一度試せますか？',
     'chatbot.systemPrompt': 'あなたは Xinrou のフレンドリーなアシスタントです。簡潔かつ温かく、コラボに誘う形で答えてください。',
-    'chatbot.note': 'チャット処理はブラウザ内だけで完結し、APIキーは保存・送信されません。',
     'contact.table.title': '連絡先を残してください、すぐお返事します',
     'contact.table.name': 'お名前',
     'contact.table.firstName': '名',
     'contact.table.lastName': '姓',
+    'contact.table.email': 'メールアドレス',
     'contact.table.org': '所属・組織名',
     'contact.table.message': 'お問い合わせ内容',
-    'contact.table.submit': 'メール下書きを作成',
+    'contact.table.submit': '今すぐ送信',
     'contact.table.helper': 'クリックするとメール下書きが開きます。送信前に自由に編集してください。',
   },
 };
@@ -331,12 +325,12 @@ const app = createApp({
       typingRunId: 0,
       chatMessages: [],
       chatInput: '',
-      apiKey: '',
       isChatLoading: false,
       quickQuestionKeys,
       contactForm: {
         firstName: '',
         lastName: '',
+        email: '',
         org: '',
         message: '',
       },
@@ -443,28 +437,14 @@ const app = createApp({
       if (!content || this.isChatLoading) return;
       this.chatMessages.push({ role: 'user', content });
       this.chatInput = '';
-
-      if (!this.apiKey.trim()) {
-        this.chatMessages.push({ role: 'assistant', content: this.t('chatbot.noKey') });
-        return;
-      }
-
       this.isChatLoading = true;
       try {
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        const response = await fetch('/api/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.apiKey.trim()}`,
           },
-          body: JSON.stringify({
-            model: 'gpt-4o-mini',
-            messages: [
-              { role: 'system', content: this.t('chatbot.systemPrompt') },
-              ...this.chatMessages.map((message) => ({ role: message.role, content: message.content })),
-            ],
-            temperature: 0.6,
-          }),
+          body: JSON.stringify({ message: content }),
         });
 
         if (!response.ok) {
@@ -472,7 +452,7 @@ const app = createApp({
         }
 
         const data = await response.json();
-        const reply = data?.choices?.[0]?.message?.content?.trim();
+        const reply = data?.reply?.trim();
         this.chatMessages.push({ role: 'assistant', content: reply || this.t('chatbot.empty') });
       } catch (error) {
         this.chatMessages.push({ role: 'assistant', content: `${this.t('chatbot.error')} ${error?.message ?? ''}`.trim() });
@@ -486,11 +466,11 @@ const app = createApp({
       this.sendMessage();
     },
     submitContactForm() {
-      const { firstName, lastName, org, message } = this.contactForm;
+      const { firstName, lastName, email, org, message } = this.contactForm;
       const displayName = [firstName, lastName].filter(Boolean).join(' ').trim();
       const subject = encodeURIComponent(`${displayName || 'New friend'} · Inquiry`);
       const body = encodeURIComponent(
-        `First name: ${firstName || '-'}\nFamily name: ${lastName || '-'}\nOrganization: ${org || '-'}\nInquiry: ${message || '-'}`,
+        `First name: ${firstName || '-'}\nLast name: ${lastName || '-'}\nEmail: ${email || '-'}\nOrganization: ${org || '-'}\nInquiry: ${message || '-'}`,
       );
       window.location.href = `mailto:xinrou.dong@outlook.com?subject=${subject}&body=${body}`;
     },
