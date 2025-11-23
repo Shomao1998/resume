@@ -129,30 +129,44 @@
                 <p class="lead">{{ t('chatbot.lead') }}</p>
               </div>
                 <div class="chat-dialog">
-                  <div class="chat-dialog__meta">
-                    <div class="quick-questions inline">
-                      <button
-                        v-for="questionKey in quickQuestionKeys"
-                        :key="questionKey"
+              <div class="chat-dialog__meta">
+                <div class="quick-questions inline">
+                  <button
+                    v-for="questionKey in quickQuestionKeys"
+                    :key="questionKey"
                         type="button"
                         class="quick-question quick-question--small"
                         @click="askQuickQuestion(questionKey)"
                       >
                         {{ t(questionKey) }}
                       </button>
-                    </div>
                   </div>
-              <div class="chat-stream">
-                <div
-                  v-for="(message, index) in chatMessages"
-                  :key="index"
-                  class="chat-message"
-                  :data-role="message.role"
-                >
-                  <div class="chat-message__meta">{{ message.role === 'assistant' ? 'AI' : 'You' }}</div>
-                  <p>{{ message.content }}</p>
                 </div>
-                <div v-if="isChatLoading" class="chat-loading">...</div>
+              <div class="chat-carousel" ref="chatCarousel">
+                <div v-if="!chatTurns.length" class="chat-empty">
+                  <p>{{ t('chatbot.welcome') }}</p>
+                  <p class="chat-empty__hint">{{ t('chatbot.scrollHint') }}</p>
+                </div>
+                <div
+                  v-for="(turn, index) in chatTurns"
+                  :key="index"
+                  class="chat-turn"
+                >
+                  <div class="chat-bubble" data-role="user">
+                    <div class="chat-message__meta">{{ t('chatbot.label.user') }}</div>
+                    <p>{{ turn.question }}</p>
+                  </div>
+                  <div class="chat-bubble" data-role="assistant">
+                    <div class="chat-message__meta">{{ t('chatbot.label.assistant') }}</div>
+                    <p v-if="turn.answer">{{ turn.answer }}</p>
+                    <p v-else-if="isChatLoading && index === chatTurns.length - 1" class="chat-loading">...</p>
+                    <p v-else class="chat-loading">{{ t('chatbot.empty') }}</p>
+                  </div>
+                </div>
+              </div>
+              <div v-if="chatTurns.length > 1" class="chat-scroll-hint">
+                <span class="scroll-dot" aria-hidden="true"></span>
+                {{ t('chatbot.scrollHint') }}
               </div>
               <form class="chat-input" @submit.prevent="sendMessage">
                 <input

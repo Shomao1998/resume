@@ -62,6 +62,9 @@ const translations = {
     'chatbot.quick.q2': 'What steps have you taken toward it?',
     'chatbot.quick.q3': "Want to grab a coffee chat?",
     'chatbot.welcome': "Nice to chat with you! I'm Xinrou—what would you like to ask me?",
+    'chatbot.scrollHint': 'Drag the slider to browse past Q&A pairs.',
+    'chatbot.label.user': 'You',
+    'chatbot.label.assistant': 'AI',
     'chatbot.error': 'Oops, I could not reach the model. Please try again.',
     'chatbot.empty': 'I did not get a response. Could you retry?',
     'chatbot.systemPrompt': "You are Xinrou's friendly assistant. Answer concisely, warmly, and invite collaboration.",
@@ -138,6 +141,9 @@ const translations = {
     'chatbot.quick.q2': '你做了哪些努力？',
     'chatbot.quick.q3': '来约一个 Coffee Chat 吧！',
     'chatbot.welcome': '很高兴与你聊天！我是Xinrou，你有什么想问我的吗？',
+    'chatbot.scrollHint': '向上或向下拖动滑块查看历史问答。',
+    'chatbot.label.user': '你',
+    'chatbot.label.assistant': 'AI',
     'chatbot.error': '抱歉，暂时无法连接模型，请稍后再试。',
     'chatbot.empty': '没有收到回复，可以再试一次吗？',
     'chatbot.systemPrompt': '你是 Xinrou 的友好助手，请简洁、温暖地回答，并邀请对方合作。',
@@ -214,6 +220,9 @@ const translations = {
     'chatbot.quick.q2': 'そのためにどんな努力をしましたか？',
     'chatbot.quick.q3': 'コーヒーチャットをしませんか？',
     'chatbot.welcome': 'お話しできて嬉しいです！Xinrouです。何を聞いてみたいですか？',
+    'chatbot.scrollHint': '上下にスライドして過去のQ&Aを見返せます。',
+    'chatbot.label.user': 'あなた',
+    'chatbot.label.assistant': 'AI',
     'chatbot.error': '接続に失敗しました。時間をおいて再試行してください。',
     'chatbot.empty': '返信が得られませんでした。もう一度試せますか？',
     'chatbot.systemPrompt': 'あなたは Xinrou のフレンドリーなアシスタントです。簡潔かつ温かく、コラボに誘う形で答えてください。',
@@ -323,7 +332,7 @@ const app = createApp({
       heroLines: createHeroLineState(initialLanguage),
       pulseFrame: null,
       typingRunId: 0,
-      chatMessages: [],
+      chatTurns: [],
       chatInput: '',
       isChatLoading: false,
       quickQuestionKeys,
@@ -435,9 +444,11 @@ const app = createApp({
     async sendMessage() {
       const content = this.chatInput.trim();
       if (!content || this.isChatLoading) return;
-      this.chatMessages.push({ role: 'user', content });
+      const newTurn = { question: content, answer: '' };
+      this.chatTurns.push(newTurn);
       this.chatInput = '';
       this.isChatLoading = true;
+      this.$nextTick(() => this.snapToLatest());
       try {
         const response = await fetch('/api/chat', {
           method: 'POST',
@@ -453,17 +464,24 @@ const app = createApp({
 
         const data = await response.json();
         const reply = data?.reply?.trim();
-        this.chatMessages.push({ role: 'assistant', content: reply || this.t('chatbot.empty') });
+        newTurn.answer = reply || this.t('chatbot.empty');
       } catch (error) {
-        this.chatMessages.push({ role: 'assistant', content: `${this.t('chatbot.error')} ${error?.message ?? ''}`.trim() });
+        newTurn.answer = `${this.t('chatbot.error')} ${error?.message ?? ''}`.trim();
       } finally {
         this.isChatLoading = false;
+        this.$nextTick(() => this.snapToLatest());
       }
     },
     askQuickQuestion(questionKey) {
       const text = this.t(questionKey);
       this.chatInput = text;
       this.sendMessage();
+    },
+    snapToLatest() {
+      const carousel = this.$refs.chatCarousel;
+      if (carousel) {
+        carousel.scrollTo({ top: carousel.scrollHeight, behavior: 'smooth' });
+      }
     },
     submitContactForm() {
       const { firstName, lastName, email, org, message } = this.contactForm;
