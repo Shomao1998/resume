@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "echo 'Build completed successfully' && exit 0"
+    "build": "echo 'Build completed successfully' && exit 0",
+    "start": "node dev-server.js"
   },
   "dependencies": {
     "openai": "^4.0.0"
