@@ -1,0 +1,13 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Azure Functions for personal site",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests configured\" && exit 0"
+  },
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
