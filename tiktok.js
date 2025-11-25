@@ -332,7 +332,7 @@ const app = createApp({
       heroLines: createHeroLineState(initialLanguage),
       pulseFrame: null,
       typingRunId: 0,
-      chatTurns: [],
+      chatMessages: [],
       chatInput: '',
       isChatLoading: false,
       quickQuestionKeys,
@@ -444,11 +444,13 @@ const app = createApp({
     async sendMessage() {
       const content = this.chatInput.trim();
       if (!content || this.isChatLoading) return;
-      const newTurn = { question: content, answer: '' };
-      this.chatTurns.push(newTurn);
+
+      // 显示用户消息
+      this.chatMessages.push({ role: 'user', content });
       this.chatInput = '';
       this.isChatLoading = true;
       this.$nextTick(() => this.snapToLatest());
+
       try {
         const response = await fetch('/api/chat', {
           method: 'POST',
@@ -458,15 +460,27 @@ const app = createApp({
           body: JSON.stringify({ message: content }),
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
+          const msg = data?.error || `HTTP ${response.status}`;
+          this.chatMessages.push({
+            role: 'assistant',
+            content: `${this.t('chatbot.error')} ${msg}`,
+          });
+          return;
         }
 
-        const data = await response.json();
-        const reply = data?.reply?.trim();
-        newTurn.answer = reply || this.t('chatbot.empty');
+        const reply = (data?.reply || '').trim();
+        this.chatMessages.push({
+          role: 'assistant',
+          content: reply || this.t('chatbot.empty'),
+        });
       } catch (error) {
-        newTurn.answer = `${this.t('chatbot.error')} ${error?.message ?? ''}`.trim();
+        this.chatMessages.push({
+          role: 'assistant',
+          content: `${this.t('chatbot.error')} ${error?.message ?? ''}`.trim(),
+        });
       } finally {
         this.isChatLoading = false;
         this.$nextTick(() => this.snapToLatest());

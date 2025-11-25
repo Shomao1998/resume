@@ -632,9 +632,9 @@ main {
 .chat-turn {
   scroll-snap-align: start;
   display: grid;
-  align-content: center;
+  align-content: start;
   gap: 8px;
-  min-height: 180px;
+  min-height: auto;
   padding: 10px;
   border-radius: 14px;
   border: 1px solid rgba(12, 16, 35, 0.06);
