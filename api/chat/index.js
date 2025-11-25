@@ -3,7 +3,7 @@ const OpenAI = require("openai");
 const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
 const apiKey = process.env.AZURE_OPENAI_API_KEY;
 const deployment = process.env.AZURE_OPENAI_DEPLOYMENT_NAME;
-const apiVersion = process.env.AZURE_OPENAI_API_VERSION;
+const apiVersion = process.env.AZURE_OPENAI_API_VERSION || "2024-07-18";
 
 module.exports = async function (context, req) {
   try {
