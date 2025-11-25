@@ -1,5 +1,10 @@
 const OpenAI = require("openai");
 
+const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
+const apiKey = process.env.AZURE_OPENAI_API_KEY;
+const deployment = process.env.AZURE_OPENAI_DEPLOYMENT_NAME;
+const apiVersion = process.env.AZURE_OPENAI_API_VERSION || "2024-08-01-preview";
+
 module.exports = async function (context, req) {
   try {
     const userMessage = req.body?.message;
@@ -12,77 +17,65 @@ module.exports = async function (context, req) {
       return;
     }
 
-    const requiredEnv = [
-      "AZURE_OPENAI_API_KEY",
-      "AZURE_OPENAI_ENDPOINT",
-      "AZURE_OPENAI_DEPLOYMENT_NAME"
-    ];
-
-    const missing = requiredEnv.filter((key) => !process.env[key]);
-
-    if (missing.length) {
-      context.log("Missing Azure OpenAI configuration:", missing.join(", "));
-
+    if (!endpoint || !apiKey || !deployment) {
       context.res = {
-        status: 200,
+        status: 500,
         body: {
-          reply: "感谢你的问候！我现在处于本地预览模式，暂未连接到云端模型，但我依然很高兴与你交流。"
+          error: "Azure OpenAI env missing",
+          endpoint: !!endpoint,
+          apiKey: !!apiKey,
+          deployment: !!deployment
         }
       };
       return;
     }
-
-    const normalizedEndpoint = process.env.AZURE_OPENAI_ENDPOINT.endsWith("/")
-      ? process.env.AZURE_OPENAI_ENDPOINT
-      : `${process.env.AZURE_OPENAI_ENDPOINT}/`;
 
     const client = new OpenAI({
-      apiKey: process.env.AZURE_OPENAI_API_KEY,
-      baseURL: `${normalizedEndpoint}openai/deployments/${process.env.AZURE_OPENAI_DEPLOYMENT_NAME}/`,
+      apiKey: apiKey,
+      baseURL: `${endpoint.replace(/\/+$/, "")}/openai/deployments/${deployment}`,
       defaultHeaders: {
-        "api-key": process.env.AZURE_OPENAI_API_KEY,
+        "api-key": apiKey
       },
-      defaultQuery: { "api-version": "2024-12-01-preview" }
+      defaultQuery: {
+        "api-version": apiVersion
+      }
     });
 
-    try {
-      const response = await client.chat.completions.create({
-        model: process.env.AZURE_OPENAI_DEPLOYMENT_NAME,
-        messages: [
-          { role: "system", content: "You are a helpful assistant on my personal website." },
-          { role: "user", content: userMessage }
-        ],
-        temperature: 0.7,
-        max_tokens: 300
-      });
-
-      context.res = {
-        status: 200,
-        body: {
-          reply: response.choices?.[0]?.message?.content?.trim()
+    const completion = await client.chat.completions.create({
+      model: deployment,
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are Xinrou's friendly assistant. Answer concisely, warmly, and invite collaboration."
+        },
+        {
+          role: "user",
+          content: userMessage
         }
-      };
-      return;
-    } catch (error) {
-      context.log("Azure OpenAI call failed:", error?.response?.data || error?.message || error);
+      ],
+      temperature: 0.6,
+      max_tokens: 300
+    });
 
-      context.res = {
-        status: 200,
-        body: {
-          reply: "感谢你的问候！我现在处于本地预览模式，暂未连接到云端模型，但我依然很高兴与你交流。",
-          error: error?.message
-        }
-      };
-      return;
-    }
-
-  } catch (error) {
-    context.log("ERROR:", error);
+    const reply = completion.choices?.[0]?.message?.content || "";
 
     context.res = {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: { reply }
+    };
+
+  } catch (error) {
+    context.res = {
       status: 500,
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: {
-        error: error.message
+        error: error.message || "Azure OpenAI call failed"
       }
     };
   }
